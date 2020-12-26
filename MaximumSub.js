@@ -42,7 +42,7 @@ function findSubSequences(str) {
      return arr
 }
 
-//findSubSequences("cadbca")
+
 
 let a = substring([6,5],"abcabc",[ 100, 50, 80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
  console.log(a)
