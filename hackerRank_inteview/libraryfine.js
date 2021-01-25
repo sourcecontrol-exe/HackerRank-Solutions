@@ -1,4 +1,11 @@
-function librabyfine(d1,m1,y1,d2,m2,y2){
+let readline = require("readline");
 
+const rl = readline.createInterface({
+    input:process.stdin,
+    output: process.stdout
+})
+
+rl.on("line", line =>{
+    let case = parseInt(line,10)
     
-}
+})
