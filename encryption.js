@@ -1,22 +1,23 @@
 function encryption(s){
-    let arr = s.split('/n')
-    let c = 0
-    let str = ''
-    arr.map(ele=> {
-        c+=ele.length
-        s=s+ele
-    })
-    let min = Math.floor(Math.pow(c,0.5))
-    let max = Math.ceil(Math.pow(c,0.5))
-    let result =[]
-    for(var i =0 ;i<min ;i++){
-        for(var j =0 ; j< max ;j++)
-        {
-            result[i][j] = s[i]
+
+    let working  = s.replace(/\s/g,'').toString()
+    
+    let col = Math.ceil(Math.sqrt(working.length))
+
+     let str = ''
+    for ( let i = 0 ; i < col ; i++){
+        let temp = i; 
+
+        while(temp < working.length){
+            str+=working[temp]
+            temp+=col;
         }
-        result[i][j] = '\n'
+        str+=" "
+        
     }
-    console.log(result)
+    
+    return(str)
+
 }
 
-encryption("haveaniceday")
+encryption("feedthedog")
