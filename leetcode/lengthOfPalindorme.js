@@ -22,7 +22,7 @@ function lengthOfPalindrome(string){
             else if(substring.length%2!==0 ){
                 let mid = (substring.length-1)/2
                 first_half = substring.slice(0, mid)
-                second_half = substring.slice(mid+1, substring.length).split("")reverse().join("")
+                second_half = substring.slice(mid+1, substring.length).split("").reverse().join("")
                    
             }
                 
