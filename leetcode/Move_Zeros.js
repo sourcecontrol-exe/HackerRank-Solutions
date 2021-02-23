@@ -17,4 +17,3 @@ function move(arr){
 }
 
 let ans = move([0,1,0,3,12])
-console.log(ans)
