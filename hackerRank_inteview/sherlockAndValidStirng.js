@@ -10,44 +10,32 @@ function SherlockAndValisString(s){
             map[s[i]]++
         }
     }
-    let sum =0;
+    
 
     let frequency = Object.values(map);
- 
-    let min = Math.min(...(Object.values(map)));
-    let max = Math.max(...Object.values(map));
- 
-    console.log(frequency);
-
+    let UniqueFre = [...new Set(frequency)];
+    
+    let minfreq = Math.min(...frequency);
+    let count  = 0
     frequency.map(ele=>{
-        sum+=ele
+        if(ele == minfreq) count++
     })
-        //console.log(Object.keys(map).length, min, sum);
+    console.log(frequency, UniqueFre, map, )
+    if(count == frequency.length){
+        return "YES"
+    }
 
-        if(sum == min*Object.keys(map).length ){
-            //console.log("yes")
-            return "Yes"
-        }
-
-        else if( sum == ((min+1)*Object.keys(map).length)){
-          
-         // console.log("Yes")
-          return "YES"
-        }
-
-        else if(sum == (min*Object.keys(map).length + 1)){
-            
-            //console.log(sum, min, s.length,Object.keys(map).length)
-            //console.log("Yes")
+    if((count == 1 || count == frequency.length-1) && UniqueFre.length<=2){
+         console.log(count)
+        if((Math.min(...UniqueFre)+1 == Math.max(...UniqueFre) )  || (Math.min(...UniqueFre) -1 ==0 && count == 1)){
             return "YES"
         }
-        
-        else {
-            return "NO"
-        }
 
-
+    }
+    return "NO"
+    
 }
 
-let sol = SherlockAndValisString("aabbc")
-console.log(sol)
+let sol = SherlockAndValisString("abcdee")
+console.log(sol);
+//aabbccddeefghi
