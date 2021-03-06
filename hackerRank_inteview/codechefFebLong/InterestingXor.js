@@ -33,9 +33,14 @@ function main() {
         let range = Math.pow(2,d)
         console.log(range,d)
         let maxProduct = 0;
-        for(var i = num-1; i> 1 ;i--){
-            maxProduct= Math.max(maxProduct,(num^i)*i)
-             console.log((num^i).toString(10)+ " i "+i.toString(10) , "max"+ maxProduct, ((num^i)*i))
+        for(var i = Math.floor(num/2); i< num-1 ;i++){
+           if(maxProduct<(num^i)*i || maxProduct== (num^i)*i){
+               maxProduct= (num^i)*i;
+               continue;
+           }
+           else{
+               break;
+           }
         }
         console.log("\n"+maxProduct)
     }
