@@ -31,14 +31,12 @@ function main() {
         let d = Math.ceil(Math.log2(num))
         
         let range = Math.pow(2,d)
+        console.log(range,d)
         let maxProduct = 0;
-        for(var i =range-1; i>=range/2 ;i--){
-            for(var j =0 ; j <=range/2 ; j++){
-                if((i^j) == num){
-                    maxProduct= Math.max(maxProduct,i*j);
-                }
-            }
+        for(var i = num-1; i> 1 ;i--){
+            maxProduct= Math.max(maxProduct,(num^i)*i)
+             console.log((num^i).toString(10)+ " i "+i.toString(10) , "max"+ maxProduct, ((num^i)*i))
         }
-        console.log(maxProduct)
+        console.log("\n"+maxProduct)
     }
 }
