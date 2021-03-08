@@ -22,17 +22,13 @@ function readLine() {
     return inputString[currentLine++];
 }
 
-function kitchen(item,cost, temp){
-    if(item == omlet){
-        
-    }
-}
+
  
 function main() {
     let n = parseInt(readLine(), 10);
      while(n--){
         let cost =0;
-        let temp1,temp2,temp3;
+        let temp1=0,temp2=0,temp3=0;
         let [count,eggs,choco,omlet,shake,cake] = readLine().split(" ");
         let menu = {
             "omlet" : parseInt(omlet),
@@ -41,7 +37,8 @@ function main() {
         }
         const sortable = Object.entries(menu).sort(([,a],[,b]) => a-b);
         for(var i =0;i<sortable.length;i++){
-            if(temp1+temp2+temp3 == parseInt(count)) break;
+            if((temp1+temp2+temp3) == parseInt(count)) break;
+
             if(sortable[i][0] == "omlet"){
                 temp1 = Math.min((parseInt(eggs)-(parseInt(eggs)%2))/2,parseInt(count));
                 eggs = (parseInt(eggs)%2);
@@ -62,8 +59,7 @@ function main() {
         if(temp1+temp2+temp3<parseInt(count)){
             console.log(-1)
         }else{
-            console.log(cost, temp3)
+            console.log(cost)
         }
-        //console.log(cost,temp1,temp2,temp3, temp3+temp2+temp1);
     }
 }
