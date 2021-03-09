@@ -57,6 +57,7 @@ function main() {
             }
         };
         if(temp1+temp2+temp3<parseInt(count)){
+            console.log(temp1,temp2,temp3,count)
             console.log(-1)
         }else{
             console.log(cost)
