@@ -31,7 +31,7 @@ function unbounded(money, arr, index){
 function knapsackUnbounded(k, arr){
     
     const dp = [true];
-  for (let i = 1; i <= k; i++) {
+  for (let i = 1; i <= k; i++){
     for (let j = 0; j < arr.length; j++) {
       if (dp[i - arr[j]]) {
           console.log(i-arr[j])
