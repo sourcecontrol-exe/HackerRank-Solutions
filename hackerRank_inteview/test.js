@@ -1,0 +1,3 @@
+
+
+findSubSequences('abcde');

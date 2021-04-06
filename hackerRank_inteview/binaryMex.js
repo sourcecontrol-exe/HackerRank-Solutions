@@ -21,32 +21,48 @@ function readLine() {
     return inputString[currentLine++];
 }
 
-function isSubsequence(s,t){
-    let index = 0;
-    for(let i =0 ;i < t.length ; i++){
-        if(s[index] == t[i]){
-            index++;
+// function isSubsequence(s,t){
+//     let index = 0;
+//     for(let i =0 ;i < t.length ; i++){
+//         if(s[index] == t[i]){
+//             index++;
+//         }
+//     }
+//     if(index==s.length){
+//         return true
+//     }
+//     else {
+//          return false
+//     }
+// }
+function findSubSequences(str) {
+    let set = new Set();
+    var len = str.length,
+        output,
+        counter = 0;
+    for (var i = 1; i < Math.pow(2, len); i++) {
+        output = '';
+        for (var j = 0; j < len; j++) {
+            if (i & (1 << j)) {
+                output += str[j];
+            }
         }
+        counter++;
+        set.add(output);
     }
-    if(index==s.length){
-        return true
-    }
-    else {
-         return false
-    }
+    return set;
 }
 
 function mex(str){
-    let set = new Set();
+    let set = findSubSequences(str)
     let temp = -1;
     let result = true;
      while(result == true && temp <= Number.MAX_SAFE_INTEGER){
         temp++
-        result = isSubsequence(temp.toString(2),str);
+        result = set.has(temp.toString(2));
      }
      return temp.toString(2);
 }
-
 
 function main() {
     
