@@ -21,20 +21,20 @@ function readLine() {
     return inputString[currentLine++];
 }
 
-// function isSubsequence(s,t){
-//     let index = 0;
-//     for(let i =0 ;i < t.length ; i++){
-//         if(s[index] == t[i]){
-//             index++;
-//         }
-//     }
-//     if(index==s.length){
-//         return true
-//     }
-//     else {
-//          return false
-//     }
-// }
+function isSubsequence(s,t){
+    let index = 0;
+    for(let i =0 ;i < t.length ; i++){
+        if(s[index] == t[i]){
+            index++;
+        }
+    }
+    if(index==s.length){
+        return true
+    }
+    else {
+         return false
+    }
+}
 function findSubSequences(str) {
     let set = new Set();
     var len = str.length,
@@ -48,20 +48,23 @@ function findSubSequences(str) {
             }
         }
         counter++;
-        set.add(output);
+        set.add(parseInt(output,2));
     }
-    return set;
+     let a = [...set]
+     a.sort((a,b) => a - b)
+
+    return new Set(a);
 }
 
 function mex(str){
-    let set = findSubSequences(str)
-    let temp = -1;
-    let result = true;
-     while(result == true && temp <= Number.MAX_SAFE_INTEGER){
-        temp++
-        result = set.has(temp.toString(2));
-     }
-     return temp.toString(2);
+   
+    let temp = 0;
+    let s = findSubSequences(str);
+
+    while(s.has(temp)){
+        temp++;
+    }
+    return temp.toString(2);
 }
 
 function main() {
@@ -70,7 +73,6 @@ function main() {
     let n = parseInt(readLine(), 10);
     while(n--){
         let s = readLine();
-        
         let ans = mex(s);
         console.log(ans)
     }
