@@ -14,5 +14,5 @@ function isSubsequence(s,t){
     }
 }
 
-let ans= isSubsequence("axc", "ahbgdc");
+let ans= isSubsequence("0", "1001011");
 console.log(ans)
