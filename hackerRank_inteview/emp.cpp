@@ -7,12 +7,15 @@ int main(){
     cin>>t>>q>>d;
     while (t--)
     {
-        ll l = (-1LL)*2e18,r = 2e18,y1= l, y2 = r;
+        ll x  = -2e18;
+        ll r = 2e18;
+        ll y1 = x;
+        ll y2 = r;
         ll curr = 1LL;
         string cc;
-        ll mid = (l+r)/2;
-        while(l<=r){
-            mid = (l+r)/2;
+        ll mid = (x+r)/2;
+        while(x<=r){
+            mid = (x+r)/2;
             if(curr == 1LL)
             cout<<curr<<" "<<mid<<" "<<y1<<endl;
             else
@@ -21,11 +24,11 @@ int main(){
             if(cc[0]=='X'){
                 curr=2LL;
             }
-            if(cc[0]=="O"){
+            if(cc=="O"){
                 break;
             }
             if(cc[0]=='N'){
-                l=mid+1LL;
+                x=mid+1LL;
             }
             if(cc[0] == 'P'){
                 r = mid-1LL;
