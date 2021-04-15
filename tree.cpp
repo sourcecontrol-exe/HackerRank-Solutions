@@ -1,10 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
 const long long mod = 1000000007;
-vector<long long> graph[1000001];
+vector<long long> graph[100001];
 long long A[1000001];
 long long B[1000001];
-long long con[100001];
+long long con[1000001];
 long long a[100001];
 long long b[100001];
 long long par[100001];
@@ -46,8 +46,8 @@ void clean(long long SUP){
     con[a[SUP]]= 0;
     con[b[SUP]] =0;
     A[a[SUP]] = 0;
-    B[a[SUP]]=0;
     A[b[SUP]]=0;
+    B[a[SUP]]=0;
     B[b[SUP]]=0;
 }
 int solve2(long long SUP){
@@ -71,7 +71,7 @@ int solve2(long long SUP){
         TEMP++;
     }
     vis[SUP]++;
-    sset.push_back(SUP);
+    sset.push_back(SUP); 
     if(TEMP ==0){
         if(vis[par[SUP]] == 0 && SUP != 1)
             LT.push(make_pair(h[par[SUP]], par[SUP]));
@@ -96,8 +96,8 @@ int sol(){
     cin>>n>>s;
     for(long long i =0;i<n-1 ;i++){
         long long u,v;
-        cin>>u>>v;
-        graph[u].push_back(v);
+        cin>>u>>v;                   
+        graph[u].push_back(v);                                            
         graph[v].push_back(u);
 
     }
@@ -155,9 +155,9 @@ int sol(){
                 u = sets[i][j];
         }
         long long cnt =0;
-        for(long long c:graph[l]){
+        for(long long c:  graph[l]){
                 if(c!=par[l])
-                cnt++;
+                    cnt++;
         }
         a = (a*(cnt+1))%mod;
     }
@@ -166,6 +166,7 @@ int sol(){
 }
 int main(){
     long long t;
+    cin>>t;
     while(t--){
         sol();
         done();
