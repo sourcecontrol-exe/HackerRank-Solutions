@@ -13,5 +13,5 @@ var rob = (amount, coins, currentCoin) =>{
       return ncount;
 } 
 
-let ans = rob(4,[1,2],0)
+let ans = rob(3,[1,2,3,4],0)
 console.log(ans)
