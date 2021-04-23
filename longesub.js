@@ -25,26 +25,45 @@ function readLine() {
 }
 
 // Complete the longestIncreasingSubsequence function below.
-function longestIncreasingSubsequence(arr) {
+function longestIncreasingSubsequence1(arr) {
  
-     let dp = new Array(arr.length).fill(0);
-     let itr = 0;
-     let temp = 0;
-     for(var i =0; i < dp.length ;i++){
-         temp = arr[i]
-         itr = 1;
-         for(var j = i+1 ;j< arr.length ; j++){
-             console.log(temp)
-             if(arr[j] > temp){
-                 itr++;
-                 temp = arr[j]
+ let dp = new Array(arr.length).fill(1);
+     
+     for(var i = 1 ; i<arr.length;i++){
+         for(var j = 0; j<i ;j++){
+             if(arr[i]>arr[j] && dp[j]>=dp[i]){
+             dp[i] = dp[j] +1;
              }
-             
          }
-         dp[i] = itr;
      }
      console.log(dp)
-     return (Math.max(...dp))
+     return (Math.max(...dp));
+}
+
+
+function recursive(arr,pos,lastnum){
+    if (pos>=arr.length) return 0;
+
+    let t1 =0;
+    if(arr[pos] > lastnum){
+        t1= 1 + recursive(arr,pos+1,arr[pos])
+    }
+    let t2 = recursive(arr,pos+1, lastnum)
+     return Math.max(t1,t2)
+}
+
+
+function longestIncreasingSubsequence(arr){
+
+    let max =0
+
+    for(var i =0; i< arr.length ;i++){
+      let temp =  Math.max(recursive(arr,i+1,arr[i]))
+      if(temp>max){
+          max = temp;
+      }
+    }
+    return max+1;
 }
 
 function main() {
