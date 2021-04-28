@@ -1,5 +1,6 @@
 
 var minimumTotal = function(triangle) {
+
     const m = triangle.length;
     const memo = new Map();
     
@@ -9,7 +10,6 @@ var minimumTotal = function(triangle) {
         const res = findMinimumPath(m - 1, i);
         min = Math.min(min, res);
     }
-    
     return min;
 
     function findMinimumPath(row, index) {
@@ -24,6 +24,17 @@ var minimumTotal = function(triangle) {
         
         return res;
     }
+};
+
+
+var minimumTotal = function(triangle) {
+    
+    for(let r = triangle.length-2; r >= 0; r--) {
+        for(let c = 0; c < triangle[r].length; c++) {
+            triangle[r][c] += Math.min(triangle[r+1][c], triangle[r+1][c+1]);
+        }
+    }
+    return triangle[0][0];
 };
 
 console.log(minimumTotal([[-1],[2,3],[1,-1,-3]]))
