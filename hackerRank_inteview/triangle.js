@@ -1,26 +1,29 @@
-function minstep(arr, m , n){
- 
-    console.log(m.n)
-    if(m == 1 && n == 1) return arr[m-1][n-1];
-
-    if(m< 1 || n< 1) return Number.MAX_SAFE_INTEGER;
-
-    if(m>1 && n> 1) return (arr[m-1][n-1]+ Math.min(minstep(arr,m-1,n), minstep(arr,m-1,n-1)))
-
-    let sol = Math.min(minstep(arr,m-1,n), minstep(arr,m-1,n-1))
-    
-    return sol;
-
-}
-
-
 
 var minimumTotal = function(triangle) {
-    let m = triangle.length;
-    let n = triangle[triangle.length-1].length;
-    console.log(n, m)
-    // let sol = minstep(triangle,m,n);
-    // return sol
+    const m = triangle.length;
+    const memo = new Map();
+    
+    let min = Number.MAX_SAFE_INTEGER;
+    
+    for (let i = 0; i < m; i++) {
+        const res = findMinimumPath(m - 1, i);
+        min = Math.min(min, res);
+    }
+    
+    return min;
+
+    function findMinimumPath(row, index) {
+        const key = row + '#' + index;
+        
+        if (row < 0) return 0;
+        if (index < 0 || index > row) return Number.MAX_SAFE_INTEGER;
+        if (memo.has(key)) return memo.get(key);
+
+        const res = triangle[row][index] + Math.min(findMinimumPath(row - 1, index - 1), findMinimumPath(row - 1, index));
+        memo.set(key, res);
+        
+        return res;
+    }
 };
 
-console.log(minimumTotal([[2],[3,4],[6,5,7],[4,1,8,3]]))
+console.log(minimumTotal([[-1],[2,3],[1,-1,-3]]))
