@@ -57,7 +57,7 @@ function primeXor(a) {
             dp[i][j] = (dp[i - 1][j] * (1 + Math.floor(num2Count.get(currentValue) / 2)) + dp[i - 1][j ^ currentValue] * Math.floor((1 + num2Count.get(currentValue)) / 2)) % MOD;;
         }
     }
-
+     console.log(dp)
     let ans = 0;
     for (let prime of primes)
         ans = (ans + dp[arrLen - 1][prime]) % MOD;
