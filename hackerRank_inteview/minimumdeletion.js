@@ -9,21 +9,22 @@ var minDeletions = function(s) {
             set[ele]++;
     });
     let arr = Object.values(set);
-
     arr.sort((a,b)=>a-b);
-
-    let workingSet = new Set(Object.values(set));
     let count = 0;
+    let workingSet = new Set(arr);
     
     for(let i = arr.length-1 ;i>=0 ;i--){
-        while(arr.indexOf(arr[i]) !== i+1 && workingSet.has(arr[i])){
-            arr[i]-=1;
-            count++;
+        if(arr.indexOf(arr[i]) !== i){
+            while(workingSet.has(arr[i]) && arr[i]>0){
+                arr[i]--;
+                count++
+            }
+            workingSet.add(arr[i]);
         }
-        workingSet.add(arr[i])
-        
     }
+    console.log(arr)
     return count;
 
 };
-console.log(minDeletions("aab"));
+
+console.log(minDeletions("bbcebab"));
