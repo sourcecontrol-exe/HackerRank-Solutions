@@ -5,21 +5,17 @@
  *
  */
 var jump = function(nums){
-    let target = nums.length;
-    let dp = new Array(nums.length).fill(0);
-
-    for(let i = 0; i<nums.length-1;i++){
-        let temp = nums[i];
-        for(j = i+1; j<nums[i];j++){
-            
-            dp[j] += temp;
-            temp--;
-            if(dp[j] == target){
-                return j;
-            }
+    let len = nums.length;
+    let current = -1;
+    let next =0;
+    let steps =0;
+    for(let i =0; next<len-1;i++){
+        if(i > current){
+            steps ++;
+            current = next;
         }
+        next = Math.max(next, nums[i]+i);
     }
-    
-
+    return steps
 };
-console.log(jump([[2,3,1,1,4]]))
+console.log(jump([2,2,2,0,4]))
