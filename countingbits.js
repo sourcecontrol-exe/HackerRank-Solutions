@@ -1,9 +1,7 @@
 var countBits = function(num) {
-    let res = []
-    for(i = 0;i<=num;i++){
-        let count =0;
-        i.toString(2).split("").map(ele=> {if(ele==1) count++});
-        res.push(count);
+    let res = [0]
+    for(let i = 1; i <= num; i++){
+        res[i] = res[Math.floor(i/2)] + Math.floor(i%2)
     }
     return res
 };
