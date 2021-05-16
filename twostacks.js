@@ -34,7 +34,7 @@ class QueueFifo{
         this.Queue.shift();
     }
     print(){
-        return this.Queue[0];
+        console.log(this.Queue[0]);
     }
 }
 class QueueLifo{
@@ -49,7 +49,7 @@ class QueueLifo{
         this.Queue.pop();
     }
     print(){
-        return this.Queue[0];
+         console.log(this.Queue[0]);
     }
 
 }
@@ -74,8 +74,6 @@ function main() {
         }
         else if(cmd =="3"){
             fifo.print();
-            
-            lifo.print();
         }
 
     }
