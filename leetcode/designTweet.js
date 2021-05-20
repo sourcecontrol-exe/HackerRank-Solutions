@@ -4,6 +4,7 @@
 var Twitter = function() {
     this.tweets = new Set();
     this.followers = new Set();
+    this.count= 1;
 };
 
 /**
@@ -14,22 +15,18 @@ var Twitter = function() {
  */
 Twitter.prototype.postTweet = function(userId, tweetId) {
     
-    if(!this.tweets[userId]){
-    
-        this.tweets[userId] = new Map()
-        this.tweets[userId].set(tweetId, 1)
-         if(this.followers[userId] == undefined){
-             this.followers[userId] = new Set();
-             this.followers[userId].add(userId);
-         }
-         else{
-             this.followers[userId].add(userId);
-         }
+    if(this.tweets[userId] == undefined){
+        this.tweets[userId] = {};
+        this.tweets[userId][tweetId] = this.count;
+        if(!this.followers[userId]){
+            this.followers[userId] = new Set;
+        }
+        this.followers[userId].add(userId)
     }
     else{
-        let value = this.tweets[userId].size
-        this.tweets[userId].set(tweetId, value);
+        this.tweets[userId][tweetId] = this.count;
     }
+    this.count++;
 };
 
 /**
@@ -38,18 +35,15 @@ Twitter.prototype.postTweet = function(userId, tweetId) {
  * @return {number[]}
  */
 Twitter.prototype.getNewsFeed = function(userId) {
-    let res = []
-    if(this.followers[userId]){
-        [...this.followers[userId]].forEach(following =>{
-            if(this.tweets[following]){
-                res.push(...this.tweets[following])
-            }
-            
+    let tweets = {};
+    [...this.followers[userId]].forEach(userId =>{
+        Object.entries(this.tweets[userId]).map(item =>{
+            tweets[item[0]] = item[1]
         })
-    }
-    res.sort((a,b)=> a-b)
-    return res.reverse().slice(0,res.length>10?10:res.length);
-    
+    });
+    tweets = new Array(...tweets)
+    //[...tweets].sort((a,b)=> a-b);
+    return (tweets)
 };
 
 /**
@@ -59,9 +53,10 @@ Twitter.prototype.getNewsFeed = function(userId) {
  * @return {void}
  */
 Twitter.prototype.follow = function(followerId, followeeId) {
-    if(this.followers[followerId] == undefined)
-        this.followers[followerId]= new Set()
-    this.followers[followerId].add(followeeId)
+    if(!this.followers[followerId]){
+        this.followers[followerId] = new Set();
+    }
+    this.followers[followerId].add(followeeId);
 };
 
 /**
@@ -71,9 +66,9 @@ Twitter.prototype.follow = function(followerId, followeeId) {
  * @return {void}
  */
 Twitter.prototype.unfollow = function(followerId, followeeId) {
-     if(this.followers[followerId] !== undefined){
-         this.followers[followerId].delete(followeeId)
-     }
+    if(this.followers[followerId]){
+        this.followers[followerId].delete(followeeId);
+    }     
 };
 
 /** 
