@@ -35,15 +35,24 @@ Twitter.prototype.postTweet = function(userId, tweetId) {
  * @return {number[]}
  */
 Twitter.prototype.getNewsFeed = function(userId) {
-    let tweets = {};
+    let result = []
+    let tweets = [];
+    if(this.followers[userId]){
     [...this.followers[userId]].forEach(userId =>{
+        if(this.tweets[userId] !== undefined)
         Object.entries(this.tweets[userId]).map(item =>{
-            tweets[item[0]] = item[1]
+            tweets.push([item[0],item[1]])
+            console.log('hah')
         })
+        
     });
-    tweets = new Array(...tweets)
-    //[...tweets].sort((a,b)=> a-b);
-    return (tweets)
+
+    tweets.sort((a,b)=> b[1]-a[1]).map(ele=>{
+        result.push(parseInt(ele[0],10))
+    })
+
+    }
+    return result.length<=10? result: result.slice(0,10)
 };
 
 /**
@@ -82,16 +91,17 @@ Twitter.prototype.unfollow = function(followerId, followeeId) {
 
 
 var obj = new Twitter();
-obj.postTweet(2,5);
+
+obj.postTweet(1,5);
 obj.postTweet(1,3);
 obj.postTweet(1,101);
-obj.postTweet(2,13);
+obj.postTweet(1,13);
 obj.postTweet(1,10);
 obj.postTweet(1,2);
 obj.postTweet(1,94);
-obj.follow(2,1);
-// obj.postTweet(1,505);
-// obj.postTweet(1,333);
-// obj.postTweet(1,22);
-// obj.postTweet(1,11);
-console.log(obj.getNewsFeed(2))
+obj.postTweet(1,505);
+obj.postTweet(1,333);
+obj.postTweet(1,22);
+obj.postTweet(1,11);
+
+console.log(obj.getNewsFeed(1))
