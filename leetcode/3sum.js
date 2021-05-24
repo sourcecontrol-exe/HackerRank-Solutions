@@ -1,22 +1,21 @@
 var threeSum = function(nums) {
-    //make a map with key is sum of elements and value is an array of elements contain those elements 
-
-    let set = new Set();
-
-    let result =[]
-    for(var i =0; i<nums.length-1; i++){
-        for(var j = i+1 ; j<nums.length; j++){
-            let key = nums[i]+nums[j]
-            set[key] = [i, j;
+    let result = {}
+    for(var i=0 ;i<nums.length-1; i++){
+        let target = nums[i];
+        var set = new Set()
+        for(var j = i+1 ;j<nums.length;j++){
+            let numberToFind = target+nums[j]!==0?-(target+nums[j]):0;
+          
+            if(set.has(numberToFind)){
+                let a = [nums[i], numberToFind, nums[j]].sort((a,b)=> a-b);
+                result[a.join("")] = a
+            }
+            else{
+                set.add(nums[j])
+            }
         }
     }
-    for(var i =0;i<nums.length;i++){
-        let key = nums[i]!==0? -1*nums[i]: nums[i];
-        if(set[key]|| !set[key].include()){
-            result.push([...set[key],nums[i]])
-            set.delete(nums[key])
-        }
-    }
-    return result
-};
+    return Object.values(result);
+
+}
 console.log(threeSum([-1,0,1,2,-1,-4]))
