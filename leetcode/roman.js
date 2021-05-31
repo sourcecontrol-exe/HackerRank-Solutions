@@ -22,36 +22,19 @@ var romanToInt = function (s) {
         "CM": 900,
         'M': 1000
     }
-    let symbols = Object.keys(set)
-    symbols = symbols.reverse();
 
-    let head = 0;
-    let tail = s.length;
-    let temp = s.length - 1;
-    let result = []
-    while (head < tail) {
-        let v = s.slice(head, temp + 1);
-        console.log(v)
-        if (v in set) {
-            result.push(set[v].toString())
-            head = temp + 1;
-            temp = s.length - 1;
+    let p1 = 0;
+    let result =0;
+    let k =3
+    while(p1<s.length){
+        let temp = s.slice(p1,p1+k)
+        if(set[temp] !== undefined){
+            result+=set[temp];
+            p1+=k;
+            k=3
         }
-        else {
-            temp--;
-        }
+        else k--;
     }
-
-    let t = 0;
-
-    result.reverse().forEach((ele, ind) => {
-        if(ind ==1 && ele<=9){
-            ele= (Number(ele)%Math.pow(10,ind))*Math.pow(10,ind)
-        }
-        t+=Number(ele)
-    })
-
-    return t
-
+    return result
 };
-console.log(romanToInt('MCMXCIV'))
+console.log(romanToInt('MMMCMXCIX'))
