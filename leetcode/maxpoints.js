@@ -3,37 +3,19 @@
  * @param {number} k
  * @return {number}
  */
+
+
 var maxScore = function (cardPoints, k) {
-    let head = 0;
-    let tail = cardPoints.length - 1;
-    let result = 0;
-    let headPointer = head;
-    let tailPointer = tail;
-    while (k--) {
-        if (cardPoints[head] == cardPoints[tail]) {
-            headPointer = head
-            tailPointer = tail
-            while (cardPoints[headPointer] == cardPoints[tailPointer]) {
-                headPointer++;
-                tailPointer--;
-                result += cardPoints[headPointer];
-            }
-            if (cardPoints[headPointer] > cardPoints[tailPointer]) {
-                head = headPointer;
-            }
-            else {
-                tail = tailPointer;
-            }
-        }
-        else if(cardPoints[head]>cardPoints[tail]){
-            result+=cardPoints[head];
-            head++
-        }
-        else{
-            result+=cardPoints[tail];
-            tail--
-        }
+    let head = k-1; 
+    let tail = cardPoints.length-1;
+    let sum =0;
+    for(var i =0;i<k;i++) sum+=cardPoints[i];
+    let max = sum;
+    
+    while(k--){
+        sum+=cardPoints[tail--]-cardPoints[head--];
+        max = Math.max(sum,max);
     }
-    return result;
-};
+    return max;
+}
 console.log(maxScore([1, 79, 80, 1, 1, 1, 200, 1], 3))
