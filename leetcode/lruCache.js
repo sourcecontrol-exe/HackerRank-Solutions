@@ -14,7 +14,6 @@ Could you do get and put in O(1) time complexity?
 var LRUCache = function(capacity) {
     this.cache=new Map();
     this.cap = capacity;
-    this.index = 0;
 };
 
 /** 
@@ -22,15 +21,11 @@ var LRUCache = function(capacity) {
  * @return {number}
  */
 LRUCache.prototype.get = function(key) {
-    if(this.cache[key] !== undefined){
-        let ans = this.cache[key]
-        let temp = Object.entries(this.cache);
-        let index = temp.indexOf([key,ans]);
-        temp.splice(index,1);
-        this.cache = Object.fromEntries(temp);
-        this.cache[key] = ans;
-        return this.cache[key]
-    }
+    if(!this.cache.has(key)) return -1;
+    let value = this.cache.get(key);
+    this.cache.delete(key);
+    this.cache.set(key,value);
+    return this.cache.get(value);
 };
 
 /** 
@@ -39,12 +34,13 @@ LRUCache.prototype.get = function(key) {
  * @return {void}
  */
 LRUCache.prototype.put = function(key, value) {
-    if(this.cache.size==this.cap){
-        let temp = Object.entries(this.cache);
-        temp.shift();
-        this.cache = Object.fromEntries(temp);
+    if(this.cache.has(key)){
+        this.cache.delete(key);
     }
-    this.cache[key]= value;
+    this.cache.set(key,value);
+    if(this.cache.size > this.cap){
+        this.cache.delete(this.cache.keys().next().value);
+    }
 };
 
 var lRUCache = new LRUCache(2);
