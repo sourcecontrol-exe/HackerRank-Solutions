@@ -14,27 +14,30 @@ var addTwoNumbers = function (l1, l2) {
         n2 += pointer2.val;
         pointer2 = pointer2.next;
     }
-    [n1, n2] = n1.length >= n2.length ? [n1.split("").reverse(), n2.split("").reverse()] : [n2.split("").reverse(), n1.split("").reverse()];
+    [n1, n2] = n1.length >= n2.length ? [n1, n2] : [n2, n1];
+    
+    console.log(n1,n2)
     let carry = 0;
     let sum = 0;
     let result = '';
     for (var itr = 0; itr < n1.length; itr++) {
-        if (!n2[itr]) {
-            n2[itr] = 0;
+        if (n2[itr] == undefined) {
+            n2+= '0';
         }
-        sum = n1[itr] + n2[itr] + carry;
+        sum = parseInt(n1[itr]) + parseInt(n2[itr]) + carry;
         result += sum % 10;
-        carry = Math.floor((n1[itr] + n2[itr]) / 10);
+        carry = Math.floor(sum / 10) > 0 ? Math.floor(sum / 10) : 0;
     }
-    console.log(result);
-
-    let ans = new ListNode();
-    let ansLL = ans
-    for (i = result.length - 1; i >= 0; i--) {
-        let temp = new ListNode(result[i]);
-        ansLL = ansLL.next;
-        ansLL = temp;
+    
+    if(carry>0) result+=carry;
+    
+    let res = new ListNode(0);
+    let tempRes = res;
+    
+    for(let i = 0 ;i<result.length ;i++){
+        let t = new ListNode(result[i]);
+        tempRes.next = t;
+        tempRes = tempRes.next;
     }
-
-    return ans.head;
-};
+   return res.next;
+}
