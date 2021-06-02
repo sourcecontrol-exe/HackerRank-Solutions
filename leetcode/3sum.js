@@ -1,4 +1,4 @@
-var threeSum = function(nums) {
+var threeSum1 = function(nums) {
     let result = {}
     for(var i=0 ;i<nums.length-1; i++){
         let target = nums[i];
@@ -18,4 +18,31 @@ var threeSum = function(nums) {
     return Object.values(result);
 
 }
-console.log(threeSum([-1,0,1,2,-1,-4]))
+var threeSum = function(nums) {
+    
+     nums.sort((a,b)=>a-b);
+    let result = {}
+    for(var i = 0; i<nums.length-2;i++){
+        
+        let low = i+1;
+        let high = nums.length-1;
+        while(low<high){
+            console.log(nums[high],nums[low],nums[i])
+            if(nums[high] + nums[low] + nums[i]>0){
+                high--;
+            }
+            else if(nums[low] + nums[high] + nums[i]< 0){
+
+                low++;
+            }
+            else{
+                result[nums[i]+""+nums[low]+""+nums[high]]=[nums[i], nums[high], nums[low]];
+                low++;
+                high--;
+            }
+        }
+    }
+    return Object.values(result);
+};
+
+console.log(threeSum([-2,0,1,1,2]))
