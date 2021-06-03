@@ -10,18 +10,39 @@
  * @param {number} k
  * @return {number}
  */
-function QuickSort(array) {
-    if(array.length<=1) return array;
 
-    let pivot = array[0];
-    
-    let left =[];
-    let right = [];
-    for(let i =1; i<array.length ; i++){
-        if(array[i] < pivot ) left.push(array[i]);
-        else right.push(array[i]);
+function partition(items, left, right) {
+    var pivot   = items[Math.floor((right + left) / 2)], //middle element
+        i       = left, //left pointer
+        j       = right; //right pointer
+    while (i <= j) {
+        while (items[i] < pivot) {
+            i++;
+        }
+        while (items[j] > pivot) {
+            j--;
+        }
+        if (i <= j) {
+            [items[i],items[j]] = [items[j], items[i]];
+            i++;
+            j--;
+        }
     }
-    return QuickSort(left).concat(pivot, QuickSort(right));
+    return i;
+}
+
+function QuickSort(items, left = 0, right = items.length-1) {
+    var index;
+    if (items.length > 1) {
+        index = partition(items, left, right); //index returned from partition
+        if (left < index - 1) { //more elements on the left side of the pivot
+            QuickSort(items, left, index - 1);
+        }
+        if (index < right) { //more elements on the right side of the pivot
+            QuickSort(items, index, right);
+        }
+    }
+    return items;
 }
 var findKthLargest = function(nums, k) {
     let result = QuickSort(nums);
