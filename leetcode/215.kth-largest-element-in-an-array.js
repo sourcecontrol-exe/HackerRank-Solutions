@@ -12,9 +12,9 @@
  */
 
 function partition(items, left, right) {
-    var pivot   = items[Math.floor((right + left) / 2)], //middle element
-        i       = left, //left pointer
-        j       = right; //right pointer
+    var pivot = items[Math.floor((right + left) / 2)], //middle element
+        i = left, //left pointer
+        j = right; //right pointer
     while (i <= j) {
         while (items[i] < pivot) {
             i++;
@@ -23,7 +23,7 @@ function partition(items, left, right) {
             j--;
         }
         if (i <= j) {
-            [items[i],items[j]] = [items[j], items[i]];
+            [items[i], items[j]] = [items[j], items[i]];
             i++;
             j--;
         }
@@ -31,7 +31,7 @@ function partition(items, left, right) {
     return i;
 }
 
-function QuickSort(items, left = 0, right = items.length-1) {
+function QuickSort(items, left = 0, right = items.length - 1) {
     var index;
     if (items.length > 1) {
         index = partition(items, left, right); //index returned from partition
@@ -44,9 +44,28 @@ function QuickSort(items, left = 0, right = items.length-1) {
     }
     return items;
 }
-var findKthLargest = function(nums, k) {
-    let result = QuickSort(nums);
-    return result[result.length-k];
+var findKthLargest = function (nums, k) {
+    let heap = [];
+
+    for (var i = 0; i < nums.length; i++) {
+
+        let element = nums[i];
+        let isAdded = false;
+        if (heap.length == 0) {
+            heap.push(element);
+        }
+        for (var j = 0; j < heap.length; j++) {
+            if (element > heap[j]) {
+                heap.splice(j, 0, element);
+                isAdded = true;
+                break;
+            }
+        }
+        if(!isAdded){
+            heap.push(element);
+        }
+    }
+    return heap[k-1]
 };
 // @lc code=end
 
