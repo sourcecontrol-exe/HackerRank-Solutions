@@ -33,9 +33,7 @@ var removeKdigits = function (num, k) {
     while(stack[0] == "0"){
         stack.shift();
     }
-
      return stack.length > 0 ? stack.join("") : '0'
-
 };
 
 
