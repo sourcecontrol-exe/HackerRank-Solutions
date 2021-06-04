@@ -23,19 +23,7 @@ function QuickSort(array) {
 
 // Quick select algo 
 
-function QuickSelect(array,k, left = 0 ,right = array.length-1) {
-     
-    for(var i=0;i<array.length-k; i++){
-        let min = i;
-        let minval = array[i];
-        for(var j = i+1; j<array.length-1;j++){
-            if(arr[j] < minval){
-                min = j; 
-                minval = array[j];
-            }
-        }
-    }
-}
+
 
 
 
